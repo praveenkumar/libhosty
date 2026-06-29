@@ -334,6 +334,14 @@ func (h *HostsFile) SaveHostsFileAs(path string) error {
 	return nil
 }
 
+// SaveHostsFileDescriptor writes the hosts file to the given open file descriptor.
+// error is not nil if something goes wrong
+func (h *HostsFile) SaveHostsFileDescriptor(file *os.File) error {
+	dataBytes := []byte(h.RenderHostsFile())
+	_, err := file.Write(dataBytes)
+	return err
+}
+
 // RemoveHostsFileLineByRow remove row at given index from HostsFileLines
 func (h *HostsFile) RemoveHostsFileLineByRow(row int) {
 	// prevent out-of-index
