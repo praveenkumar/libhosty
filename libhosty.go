@@ -2,7 +2,6 @@
 package libhosty
 
 import (
-	"io/ioutil"
 	"net"
 	"os"
 	"regexp"
@@ -327,7 +326,7 @@ func (h *HostsFile) SaveHostsFileAs(path string) error {
 	dataBytes := []byte(h.RenderHostsFile())
 
 	// write file to disk
-	err := ioutil.WriteFile(path, dataBytes, 0644)
+	err := os.WriteFile(path, dataBytes, 0644)
 	if err != nil {
 		return err
 	}
